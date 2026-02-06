@@ -1,12 +1,13 @@
 // lib/feature/Account/widgets/settings_list.dart
 
+import 'package:cookly/core/widgets/show_logout_dialog.dart';
 import 'package:flutter/material.dart';
 
-Widget settingsList() {
-  // REMOVE Expanded from here
+Widget settingsList(BuildContext context) {
   return ListView(
-    shrinkWrap: true, // Add this to allow it to play nice with Columns
-    physics: const NeverScrollableScrollPhysics(), // Let the main screen handle scrolling if needed
+    shrinkWrap: true,
+    physics:
+        const NeverScrollableScrollPhysics(), // Let the main screen handle scrolling if needed
     padding: const EdgeInsets.symmetric(horizontal: 10),
     children: [
       _settingsTile(Icons.favorite_border, "My Favorites", Colors.black),
@@ -14,10 +15,12 @@ Widget settingsList() {
       _settingsTile(Icons.notifications_none, "Notifications", Colors.black),
       _settingsTile(Icons.lock_outline, "Privacy Policy", Colors.black),
       const Divider(height: 40),
+
       _settingsTile(Icons.logout, "Log Out", Colors.red),
     ],
   );
 }
+
 Widget _settingsTile(IconData icon, String title, Color textColor) {
   return ListTile(
     leading: Icon(
@@ -30,7 +33,7 @@ Widget _settingsTile(IconData icon, String title, Color textColor) {
     ),
     trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
     onTap: () {
-      // Add navigation or logic here
+      // Will Add navigation or logic here
     },
   );
 }

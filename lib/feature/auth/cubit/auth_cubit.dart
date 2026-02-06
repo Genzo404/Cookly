@@ -68,4 +68,23 @@ class AuthCubit extends Cubit<AuthState> {
     await FirebaseAuth.instance.signOut();
     emit(AuthInitial()); // Reset state so the app redirects to Login
   }
+
+  // Reset Password
+  Future<void> resetPassword({required String email}) async {
+    emit(AuthLoading());
+    try {
+      // Attempt to send the reset email directly
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      emit(AuthResetEmailSent());
+    } on FirebaseAuthException catch (e) {
+      // If Email Enumeration Protection is OFF in Firebase Console, throw 'user-not-found'
+      if (e.code == 'user-not-found') {
+        emit(AuthError("This email is not registered. Please sign up first."));
+      } else {
+        emit(AuthError(e.message ?? "An error occurred"));
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
 }

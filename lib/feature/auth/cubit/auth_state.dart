@@ -13,3 +13,5 @@ class AuthError extends AuthState {
   final String message;
   AuthError(this.message);
 }
+
+final class AuthResetEmailSent extends AuthState {}

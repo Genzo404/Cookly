@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFf5f1e2),
-      // IndexedStack preserves the state (scroll position/search) of each tab
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,
@@ -64,7 +63,6 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent> {
   String selectedCategory = 'All';
   String searchQuery = "";
-  // Controller moved here to manage Home-specific search state
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -102,7 +100,7 @@ class _HomeContentState extends State<HomeContent> {
               onCategorySelected: (category) {
                 setState(() {
                   selectedCategory = category;
-                  // Optional: clear search when clicking a category for better UX
+                 //CLEAR SEARCH WHEN CATEGORY SELECTED
                   if (searchQuery.isNotEmpty) {
                     searchController.clear();
                     searchQuery = "";
@@ -123,7 +121,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               const SizedBox(height: 16),
-              FilteredRecipeList(category: 'All', searchQuery: searchQuery), // Updated parameter
+              FilteredRecipeList(category: 'All', searchQuery: searchQuery),
             ] 
             else if (selectedCategory == 'All') ...[
               const QuickEasySection(),

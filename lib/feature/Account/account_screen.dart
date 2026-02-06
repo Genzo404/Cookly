@@ -13,17 +13,12 @@ class AccountScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            profileHeader(), // Ensure this returns a Container with color/height!
+            profileHeader(),
             const SizedBox(height: 20),
             statRow(),
             const SizedBox(height: 20),
-            // Keep the Expanded here
-            Expanded(
-              child: SingleChildScrollView(
-                // Added to prevent overflow
-                child: settingsList(),
-              ),
-            ),
+
+            Expanded(child: SingleChildScrollView(child: settingsList(context))),
           ],
         ),
       ),

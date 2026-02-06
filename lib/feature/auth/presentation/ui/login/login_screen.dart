@@ -1,4 +1,5 @@
 import 'package:cookly/core/widgets/TextField.dart';
+import 'package:cookly/core/widgets/show_forget_password_dialog.dart';
 import 'package:cookly/core/widgets/show_loading_dialog.dart';
 import 'package:cookly/feature/auth/cubit/auth_cubit.dart';
 import 'package:cookly/feature/auth/cubit/auth_state.dart';
@@ -20,8 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // Helper function to safely close the loading dialog
-  // This prevents the "Failed assertion: ancestor != null" crash
+  //To prevent crash when popping loading dialog on error/success
   void _closeLoadingDialog() {
     if (Navigator.of(context, rootNavigator: true).canPop()) {
       Navigator.of(context, rootNavigator: true).pop();
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // Forgot Password Logic
+                        showForgotPasswordDialog(context);
                       },
                       child: const Text(
                         'Forgot Password?',
@@ -125,6 +125,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (_) => const HomeScreen(),
+                              ),
+                            );
+                          } else if (state is AuthResetEmailSent) {
+                            _closeLoadingDialog(); // Close the loading spinner
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Success! Please check your inbox for the reset link.",
+                                ),
+                                backgroundColor: Color(
+                                  0xFF09338c,
+                                ), 
                               ),
                             );
                           } else if (state is AuthError) {
