@@ -45,7 +45,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             decoration: BoxDecoration(
-              color: const Color(0xFF1a1a1a), // Bold dark background
+              color: const Color(0xFF1a1a1a),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -236,7 +236,6 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                                 .toList();
 
                             if (cookingSteps.isEmpty) {
-                              // Optional: Show a message if no instructions exist
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text(

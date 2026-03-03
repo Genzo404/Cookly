@@ -313,15 +313,12 @@ Future<void> removeScriptRecipes() async {
   print("Cleanup complete: 20 recipes removed.");
 }
 
-// --- KEEP YOUR uploadAllRecipes() FUNCTION AT THE BOTTOM ---
 Future<void> uploadAllRecipes() async {
   final CollectionReference recipes = FirebaseFirestore.instance.collection(
     'recipes',
   );
 
   List<Map<String, dynamic>> data = [
-    // --- 10 NEW RECIPES (Breakfast, Snacks, Drinks) ---
-
     // BREAKFAST
     {
       "name": "Shakshuka with Feta",
@@ -490,5 +487,3 @@ Future<void> addInstructionsToRecipes() async {
 
   print("Instructions successfully added to existing recipes!");
 }
-
-
