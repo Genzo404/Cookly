@@ -12,20 +12,20 @@ class FavoritesScreen extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFf5f1e2), // Theme background
+      backgroundColor: const Color(0xFFf5f1e2),
       appBar: AppBar(
-        toolbarHeight: 100, // Higher toolbar to move title down
-        automaticallyImplyLeading: false, // Removes back button
+        toolbarHeight: 100,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Padding(
-          padding: EdgeInsets.only(top: 20, left: 4), 
+          padding: EdgeInsets.only(top: 20, left: 4),
           child: Text(
             "Saved Recipes",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1a1a1a), // Bold Home-style color
-              fontSize: 28, // Bold Home-style size
+              color: Color(0xFF1a1a1a),
+              fontSize: 28,
             ),
           ),
         ),
@@ -56,7 +56,7 @@ class FavoritesScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                mainAxisExtent: 260, // Prevents overflow
+                mainAxisExtent: 260,
               ),
               itemCount: favDocs.length,
               itemBuilder: (context, index) {
@@ -72,7 +72,6 @@ class FavoritesScreen extends StatelessWidget {
 
                     var data = recipeSnap.data!.data() as Map<String, dynamic>;
 
-                    // FIXED: Wrap the RecipeCard in GestureDetector
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -85,7 +84,8 @@ class FavoritesScreen extends StatelessWidget {
                               time: "${data['time']} Min",
                               calories: "${data['calories']} Cal",
                               imageUrl: data['imageURL'] ?? '',
-                              ingredients: data['ingredients']?.toString() ?? '',
+                              ingredients:
+                                  data['ingredients']?.toString() ?? '',
                               description: data['description'] ?? '',
                             ),
                           ),

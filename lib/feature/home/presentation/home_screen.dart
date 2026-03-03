@@ -100,6 +100,7 @@ class _HomeContentState extends State<HomeContent> {
               onCategorySelected: (category) {
                 setState(() {
                   selectedCategory = category;
+                  
                  //CLEAR SEARCH WHEN CATEGORY SELECTED
                   if (searchQuery.isNotEmpty) {
                     searchController.clear();

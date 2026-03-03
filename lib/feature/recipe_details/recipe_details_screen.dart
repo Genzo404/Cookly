@@ -30,7 +30,7 @@ class RecipeDetailsScreen extends StatefulWidget {
 }
 
 class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
-  // 1. CUSTOM TOP OVERLAY NOTIFICATION
+  //CUSTOM TOP OVERLAY NOTIFICATION
   void _showCustomToast(BuildContext context, String message) {
     OverlayState? overlayState = Overlay.of(context);
     late OverlayEntry overlayEntry;
@@ -80,7 +80,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
     Future.delayed(const Duration(seconds: 2), () => overlayEntry.remove());
   }
 
-  // 2. TOGGLE FAVORITE LOGIC
+  //TOGGLE FAVORITE LOGIC
   Future<void> _toggleFavorite(bool isCurrentlyFav, String? favDocId) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;

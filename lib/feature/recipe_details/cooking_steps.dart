@@ -21,7 +21,7 @@ class _CookingStepsScreenState extends State<CookingStepsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf5f1e2), // Matching your theme
+      backgroundColor: const Color(0xFFf5f1e2),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -31,12 +31,15 @@ class _CookingStepsScreenState extends State<CookingStepsScreen> {
         ),
         title: Text(
           widget.title,
-          style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Column(
         children: [
-          // Progress bar at the top
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: LinearProgressIndicator(
@@ -47,7 +50,7 @@ class _CookingStepsScreenState extends State<CookingStepsScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          
+
           Expanded(
             child: PageView.builder(
               controller: _pageController,
@@ -64,7 +67,11 @@ class _CookingStepsScreenState extends State<CookingStepsScreen> {
                         backgroundColor: const Color(0xFF09338c),
                         child: Text(
                           "${index + 1}",
-                          style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -94,28 +101,42 @@ class _CookingStepsScreenState extends State<CookingStepsScreen> {
                 if (_currentStep > 0)
                   TextButton(
                     onPressed: () => _pageController.previousPage(
-                        duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
-                    child: const Text("Back", style: TextStyle(color: Colors.grey, fontSize: 18)),
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    ),
+                    child: const Text(
+                      "Back",
+                      style: TextStyle(color: Colors.grey, fontSize: 18),
+                    ),
                   )
                 else
                   const SizedBox(width: 80),
-                
+
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF09338c),
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 15,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                   onPressed: () {
                     if (_currentStep < widget.steps.length - 1) {
                       _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
                     } else {
                       Navigator.pop(context); // Finished!
                     }
                   },
                   child: Text(
-                    _currentStep == widget.steps.length - 1 ? "Finish" : "Next Step",
+                    _currentStep == widget.steps.length - 1
+                        ? "Finish"
+                        : "Next Step",
                     style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),

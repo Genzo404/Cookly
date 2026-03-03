@@ -1,6 +1,5 @@
 // lib/feature/Account/widgets/settings_list.dart
 
-import 'package:cookly/core/widgets/show_logout_dialog.dart';
 import 'package:flutter/material.dart';
 
 Widget settingsList(BuildContext context) {

@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (state is AuthLoading) {
                             showLoadingDialog(context);
                           } else if (state is AuthSuccess) {
-                            _closeLoadingDialog(); // Safe pop the dialog
+                            _closeLoadingDialog();
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -134,13 +134,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 content: Text(
                                   "Success! Please check your inbox for the reset link.",
                                 ),
-                                backgroundColor: Color(
-                                  0xFF09338c,
-                                ), 
+                                backgroundColor: Color(0xFF09338c),
                               ),
                             );
                           } else if (state is AuthError) {
-                            _closeLoadingDialog(); // Safe pop the dialog
+                            _closeLoadingDialog();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(state.message)),
                             );
