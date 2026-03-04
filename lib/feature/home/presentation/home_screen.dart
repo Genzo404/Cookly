@@ -1,11 +1,6 @@
-import 'package:cookly/core/widgets/categories.dart';
-import 'package:cookly/core/widgets/filtered_recipe_list.dart';
-import 'package:cookly/core/widgets/home_header.dart';
-import 'package:cookly/core/widgets/home_searchbar.dart';
-import 'package:cookly/core/widgets/promocard.dart';
-import 'package:cookly/core/widgets/quick_easy_section.dart';
 import 'package:cookly/feature/Account/account_screen.dart';
 import 'package:cookly/feature/favorite/favorite_screen.dart';
+import 'package:cookly/feature/home/presentation/home_content.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,17 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const HomeContent(), // Index 0
     const FavoritesScreen(), // Index 1
-     AccountScreen(), // Index 2
+    AccountScreen(), // Index 2
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFf5f1e2),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _screens,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
@@ -45,7 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
         ],
       ),
@@ -57,90 +52,5 @@ class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
   @override
-  State<HomeContent> createState() => _HomeContentState();
-}
-
-class _HomeContentState extends State<HomeContent> {
-  String selectedCategory = 'All';
-  String searchQuery = "";
-  final TextEditingController searchController = TextEditingController();
-
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const HomeHeader(),
-            const SizedBox(height: 16),
-            
-            // Pass the controller and logic to the search bar
-            HomeSearchbar(
-              controller: searchController,
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value.toLowerCase();
-                });
-              },
-            ),
-            
-            const SizedBox(height: 16),
-            const Promocard(),
-            const SizedBox(height: 24),
-
-            Categories(
-              onCategorySelected: (category) {
-                setState(() {
-                  selectedCategory = category;
-                  
-                 //CLEAR SEARCH WHEN CATEGORY SELECTED
-                  if (searchQuery.isNotEmpty) {
-                    searchController.clear();
-                    searchQuery = "";
-                  }
-                });
-              },
-            ),
-
-            const SizedBox(height: 24),
-
-            // SEARCH LOGIC: Show results if searching, otherwise show categories
-            if (searchQuery.isNotEmpty) ...[
-              Text(
-                "Searching for '$searchQuery'",
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              FilteredRecipeList(category: 'All', searchQuery: searchQuery),
-            ] 
-            else if (selectedCategory == 'All') ...[
-              const QuickEasySection(),
-            ] 
-            else ...[
-              Text(
-                '$selectedCategory Recipes',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              FilteredRecipeList(category: selectedCategory, searchQuery: '',),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
+  State<HomeContent> createState() => HomeContentState();
 }

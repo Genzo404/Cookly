@@ -14,8 +14,17 @@ class QuickEasySection extends StatelessWidget {
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Quick & Easy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text('View all', style: TextStyle(color: Color(0xFFe55f49), fontWeight: FontWeight.bold)),
+            Text(
+              'Quick & Easy',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'View all',
+              style: TextStyle(
+                color: Color(0xFFe55f49),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -24,7 +33,7 @@ class QuickEasySection extends StatelessWidget {
           child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('recipes')
-                .where('time', isLessThan: 25) 
+                .where('time', isLessThan: 25)
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,10 +50,12 @@ class QuickEasySection extends StatelessWidget {
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   var data = docs[index].data() as Map<String, dynamic>;
-                  String docId = docs[index].id; 
+                  String docId = docs[index].id;
 
                   return Padding(
-                    padding: const EdgeInsets.only(right: 15.0), // Added spacing between cards
+                    padding: const EdgeInsets.only(
+                      right: 15.0,
+                    ), // Added spacing between cards
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -57,7 +68,8 @@ class QuickEasySection extends StatelessWidget {
                               calories: "${data['calories']} Cal",
                               imageUrl: data['imageURL'] ?? "",
                               ingredients: data['ingredients'] ?? "",
-                              description: data['description'] ?? "", recipe: {},
+                              description: data['description'] ?? "",
+                              recipe: data,
                             ),
                           ),
                         );
