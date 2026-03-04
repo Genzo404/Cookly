@@ -1,5 +1,3 @@
-// lib/feature/Account/widgets/settings_list.dart
-
 import 'package:flutter/material.dart';
 
 Widget settingsList(BuildContext context) {

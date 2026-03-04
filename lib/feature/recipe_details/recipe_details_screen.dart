@@ -225,8 +225,6 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Pull the instructions array from the recipe map
-                            // If it's empty or missing, provide a fallback message
                             List<dynamic> instructionsData =
                                 widget.recipe['instructions'] ?? [];
 
